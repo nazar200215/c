@@ -48,7 +48,8 @@ int main()
 			}
 		}
 	}
-	cout << "max = " << m << " row = " << max_row << " col = " << max_col;
+	cout << "max = " << m << "; row = " << max_row << "; col = " << max_col;
+	cout << "\n";
 
 
 	// change rows
@@ -70,7 +71,7 @@ int main()
 	}
 
 	// show result matrix
-	cout << "Star matrix:\n";
+	cout << "Result matrix:\n";
 	for (int i = 0; i < ROWS; i++)
 	{
 		for (int j = 0; j < COLS; j++)
