@@ -27,7 +27,7 @@ int GetYoungList(const Student* ip_list, int list_size, int start_year, Student*
 	return res;
 }
 
-void PrintList(Student* p_list, int count)
+void PrintList(Student *p_list, int count)
 {
 	for (int i = 0; i < count; ++i)
 	{
