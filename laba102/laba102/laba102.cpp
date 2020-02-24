@@ -1,17 +1,24 @@
 #include <iostream>
 #include <ctime>
+#include <Windows.h>
+#include <cstdlib>
 using namespace std;
 
+void SetColor(int text, int bg) {
+	HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hStdOut, (WORD)((bg << 4) | text));
+}
+
 //створюємо перший масив
-void FillArray1(float arr1[], float size1)
-{
+void FillArray1(int arr1[], int size1)
+{	
 	for (int i = 0; i < size1; i++)
 	{
 		arr1[i] = rand() % 100 -50;
 	}
 }
 //виводимо перший масив
-void PrintArray1(float arr1[], float size1)
+void PrintArray1(int arr1[], int size1)
 {
 	for (int i = 0; i < size1; i++)
 	{
@@ -19,7 +26,7 @@ void PrintArray1(float arr1[], float size1)
 	}
 }
 //створюємо другий масив
-void FillArray2(float arr2[], float size2)
+void FillArray2(int arr2[], int size2)
 {
 	for (int i = 0; i < size2; i++)
 	{
@@ -27,7 +34,7 @@ void FillArray2(float arr2[], float size2)
 	}
 }
 //виводимо другий масив
-void PrintArray2(float arr2[], float size2)
+void PrintArray2(int arr2[], int size2)
 {
 	for (int i = 0; i < size2; i++)
 	{
@@ -35,7 +42,7 @@ void PrintArray2(float arr2[], float size2)
 	}
 }
 //пошук максимуму в першому масиві та мінімуму в другому
-void MinMaxFinder(float arr1[], float size1, float arr2[], float size2, float *pmax, float *pmin)
+void MinMaxFinder(int arr1[], int size1, int arr2[], int size2, int *pmax, int *pmin)
 {
 	for (int i = 0; i < size1; i++)
 	{
@@ -53,7 +60,7 @@ void MinMaxFinder(float arr1[], float size1, float arr2[], float size2, float *p
 			*pmin = arr2[i];
 		}
 	}
-	cout << endl << "Min element of Array 2: " << *pmin;
+	cout << endl << "Min element of Array 2: " << *pmin << endl;
 }
 
 //обчислення суми
@@ -62,25 +69,33 @@ float SumZ(float max, float min)
 	return (max - min) / 2;
 }
 
-float main()
+int main()
 {
 	srand(time(NULL));
-	const int SIZE1 = 10;
-	float ARR1[SIZE1];
+	int SIZE1 = 0;
+	cout << "SIZE OF ARR1: " << endl;
+	cin >> SIZE1;
+	int* ARR1 = new int[SIZE1];
 	cout << "Array 1: ";
 	FillArray1(ARR1, SIZE1);
 	PrintArray1(ARR1, SIZE1);
+	cout << endl;
 
-	const int SIZE2 = 12;
-	float ARR2[SIZE2];
-	cout << endl << "Array 2: ";
+	int SIZE2 = 0;
+	cout << endl << "SIZE OF ARR2: " << endl;
+	cin >> SIZE2;
+	int* ARR2 = new int[SIZE2];
+	cout << "Array 2: ";
 	FillArray2(ARR2, SIZE2);
 	PrintArray2(ARR2, SIZE2);
-
-	float MAX = -1e10; float MIN = 1e10;
+	cout << "\n ~~~~~~~~~~~~~~~~~~~~ \n ~~~~~~~~~~~~~~~~~~~~";
+	int MAX = -1e10; int MIN = 1e10;
 	MinMaxFinder(ARR1, SIZE1, ARR2, SIZE2, &MAX, &MIN);
 	
-
-	cout << endl <<"Z = "<< SumZ(MAX, MIN);
-
+	SetColor(5, 0);
+	cout << endl <<"RESULT = "<< SumZ(MAX, MIN) << endl;
+	delete[] ARR1;
+	delete[] ARR2;
+	SetColor(0, 0);
+	system("pause");
 }
